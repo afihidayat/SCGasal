@@ -119,10 +119,14 @@ if __name__ == '__main__':
 
     api = twitter_client.get_twitter_client_api()
 
-    tweets = api.user_timeline(screen_name="Banjir", count=20)
+    tweets = api.user_timeline(screen_name="infoBMKG", count=20, q="#Gempa")
 
-    #print(dir(tweets[0]))
-    #print(tweets[0].retweet_count)
+    for tweet in Cursor(api.search,q="#Gempa",count=20, lang="en").items():
+        print (tweet.text)
+        # csvWriter.writerow([tweet.created_at, tweet.text.encode('utf-8')])
+
+    # print(dir(tweets[0]))
+    # print(tweets[0].retweet_count)
 
     df = tweet_analyzer.tweets_to_data_frame(tweets)
     
