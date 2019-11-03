@@ -12,7 +12,7 @@ def buildTestSet(search_keyword):
 def writeToFile(path,data):
     file = open(path, "a+")
     file.write('[\n')
-    for dictionary in data: 
+    for dictionary in data:
         dict_to_json = json.dumps(dictionary)
         file.write(dict_to_json + ",\n")
     file.write(']')
@@ -24,3 +24,6 @@ twitter_api = twitter.Api(consumer_key='IlZ0a3CpHmi3kUxFJcyla0wI1',
 search_term = input("Enter a search keyword:")
 testDataSet = buildTestSet(search_term)
 writeToFile('kumpulan_tweet/2017.json',testDataSet)
+
+
+python Exporter.py --since 2016-01-01 --until 2016-12-31 --maxtweets 200 --querysearch "gempa bumi"
