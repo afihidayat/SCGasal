@@ -1,19 +1,19 @@
-from tweepy import API 
+from tweepy import API
 from tweepy import Cursor
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
- 
+
 import numpy as np
 import pandas as pd
- 
+
 # import twitter_credentials
 ACCESS_TOKEN = "103190390-O3YasEybxMuQs4eGuVo7Cty0GYkCQuVmrU8u8deq"
 ACCESS_TOKEN_SECRET = "FbbiRSgBDky3A4jHyuid2Fbxo72AGMwiiy76p37IvNmka"
 CONSUMER_KEY = "IlZ0a3CpHmi3kUxFJcyla0wI1"
 CONSUMER_SECRET = "FLLLQDYPAoox8scyDh5a4bpe97H6OGnlhXY8WnQNaJVuuNwupC"
 
- 
+
 # # # # TWITTER CLIENT # # # #
 class TwitterClient():
     def __init__(self, twitter_user=None):
@@ -58,15 +58,15 @@ class TwitterStreamer():
     Class for streaming and processing live tweets.
     """
     def __init__(self):
-        self.twitter_autenticator = TwitterAuthenticator()    
+        self.twitter_autenticator = TwitterAuthenticator()
 
     def stream_tweets(self, fetched_tweets_filename, hash_tag_list):
         # This handles Twitter authetification and the connection to Twitter Streaming API
         listener = TwitterListener(fetched_tweets_filename)
-        auth = self.twitter_autenticator.authenticate_twitter_app() 
+        auth = self.twitter_autenticator.authenticate_twitter_app()
         stream = Stream(auth, listener)
 
-        # This line filter Twitter Streams to capture data by the keywords: 
+        # This line filter Twitter Streams to capture data by the keywords:
         stream.filter(track=hash_tag_list)
 
 
@@ -87,7 +87,7 @@ class TwitterListener(StreamListener):
         except BaseException as e:
             print("Error on_data %s" % str(e))
         return True
-          
+
     def on_error(self, status):
         if status == 420:
             # Returning False on_data method in case rate limit occurs.
@@ -111,7 +111,7 @@ class TweetAnalyzer():
 
         return df
 
- 
+
 if __name__ == '__main__':
 
     twitter_client = TwitterClient()
@@ -123,14 +123,14 @@ if __name__ == '__main__':
 
     for tweet in Cursor(api.search,q="#Gempa",count=20, lang="en").items():
         print (tweet.text)
-        # csvWriter.writerow([tweet.created_at, tweet.text.encode('utf-8')])
 
     # print(dir(tweets[0]))
     # print(tweets[0].retweet_count)
 
     df = tweet_analyzer.tweets_to_data_frame(tweets)
-    
+
     print(df.head(10))
+
     print("Average Length:")
      # Get average length over all tweets:
     print( np.mean(df['len']))
