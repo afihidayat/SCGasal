@@ -1,1 +1,2 @@
 Project ini dibuat semata mata untuk memenuhi nilai Sistem Cerdas. Project ini tentang mengolah tweet menjadi analisis tentang bencana alam yang terjadi sehingga masyarakat khususnya yang menggunakan twitter lebih cepat aware akan bencana alam yang terjadi disekitarnya.
+Link Mockup: https://www.figma.com/file/CJItZ0oWnG8Qb7jXzU02nQ/tweetsaster?node-id=0%3A1
