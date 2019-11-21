@@ -16,10 +16,10 @@ def open_csv():
                 each[9] + '",' + '"flag": "' + each[10] + '"}'
             # print(temp, "\n")
             temp = json.loads(temp)
-            print(temp["text"])
             Profile.objects.create(retweets=temp["retweets"], favorites=temp["favorites"], flag=temp["flag"],text=temp["text"])
             
         print(allData)
+        
 
     # app_name = 'webtweesaster' # change this to your Django app name
     # model_name = 'person' # the name of you Django model

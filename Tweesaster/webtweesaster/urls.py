@@ -3,4 +3,6 @@ from .views import *
 
 urlpatterns = [
 	path('',home, name='tweesaster'),
+	path('search',search, name='search'),
+
 ]
