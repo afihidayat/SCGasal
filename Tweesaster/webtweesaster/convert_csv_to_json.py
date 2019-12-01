@@ -1,7 +1,6 @@
 import csv
 import json
 from webtweesaster.models import Profile
-allData = []
 
 # https://docs.python.org/2/library/csv.html
 # change to the csv file name that you are trying to upload

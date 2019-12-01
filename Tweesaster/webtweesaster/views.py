@@ -21,7 +21,6 @@ class counter():
 		else :
 			prob_not_disaster += 1.0
 		for word in text:
-			# word = word.lower()
 			if flag != "flag":
 				if word in dict:
 					dict[word][int(flag)] += 1
@@ -34,7 +33,6 @@ class counter():
 
 def home(request):
 	Profile.objects.all().delete()
-	# dict = {}
 	open_csv()
 	counter()
 	for word in dict.keys():
@@ -58,7 +56,6 @@ def search(request):
 
 
 def analyze(tweet):
-	print(tweet)
 	words = tweet.lower().split(" ")
 	p_true = 1
 	p_false = 1
@@ -73,7 +70,8 @@ def analyze(tweet):
 		else:
 			p_true *= (0 + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
 			p_false *= (0 + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
-			
+	p_true *= prob_disaster
+	p_false *= prob_not_disaster
 	print("==========ANALYSIS============")
 	print("true:", p_true, ",false:", p_false,"\nthen:")
 	if p_true > p_false:
