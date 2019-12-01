@@ -1,0 +1,31 @@
+{%load static%}
+
+<!-- Home page (home.html), footer ,and header by Jeremy -->
+
+{% block content %}
+<body>
+  <footer id="aboutus">
+
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1 ><img src="{% static 'css/sinarperaklogo.png' %}" alt="SinarPerak"><br></h1>
+      <p>
+       SinarPerak is a non-profit foundation that mainly focused in disaster fund relief. We want you to be a part of our journey by helping us donating to one who needs.</p>
+    </div>
+     <div class="col-sm-4">
+      <h1 style="font-size: 25px;color: #80475E;font-weight: bold">Act Now!<br></h1>
+      <p class="ab"><a href="{% url '#">Donate</a></p>
+      <p class="ab"><a href="{% url '#">Create Campaign!</a></p>
+     
+    </div>
+    <div class="col-sm-4">
+      <h1 style="font-size: 25px;color: #80475E;font-weight: bold">Contact Us<br></h1>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Jl. H. Amat No.3, Kukusan, Beji, Kota Depok, Jawa Barat 16425</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +62 85945319721</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> bantusesama@gmail.com</p> 
+    </div>
+      </div> 
+    </div>
+</footer>
+  {% endblock %}

@@ -1,0 +1,20 @@
+{%load static%}
+
+<!DOCTYPE html>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<link rel="stylesheet" href="{% static 'tweesaster.css' %}" type="text/css">
+<div id="app" class="flex">
+  <h1>tweesaster</h1>
+  <p>Tweesaster adalah <code>project sc gasal</code>, Project ini tentang mengolah tweet menjadi analisis tentang bencana alam yang terjadi sehingga 
+    masyarakat khususnya yang menggunakan twitter lebih cepat aware akan bencana alam yang terjadi disekitarnya.</p>
+    <div class="card">
+      <!-- <h1><p style="color:black">Input:</p></h1> -->
+      <form method="POST" action="/search">
+        {% csrf_token %}
+        <input type="text" name="textfield">
+        <button type="submit">Upload text</button>
+        </form>
+    </div>
+    <!-- <h2> Analisis </h2> -->
+</div>
+
