@@ -1,0 +1,19 @@
+{%load static%}
+
+<!DOCTYPE html>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<link rel="stylesheet" href="{% static 'tweesaster.css' %}" type="text/css">
+<div id="app" class="flex">
+  <h1>tweesaster</h1>
+    <div class="banner">
+    <div class="banner-text">
+      <h3>{{ data }}</h3>
+      {% if result == True %}
+      <h3>terkait dengan gempa bumi</h3>
+      {% else %}
+      <h3>tidak terkait dengan gempa bumi</h3>
+      {% endif %}
+    </div>
+  </div>
+    <!-- <h2> Analisis </h2> -->
+</div>

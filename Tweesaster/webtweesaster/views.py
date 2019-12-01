@@ -6,29 +6,35 @@ from django.core.exceptions import *
 
 dict = {}
 sampah = ["ada", "terjadi", "lagi"]
-
+prob_disaster = 0.0
+prob_not_disaster = 0.0
+total_data = 0.0
 
 class counter():
 	alldata = Profile.objects.all()
 	for each in alldata:
+		total_data += 1
 		text = each.text.lower().split(" ")
 		flag = each.flag
+		if (flag == "1"):
+			prob_disaster += 1.0
+		else :
+			prob_not_disaster += 1.0
 		for word in text:
-			# word = word.lower()
 			if flag != "flag":
 				if word in dict:
 					dict[word][int(flag)] += 1
 				else:
 					dict.update({word: [0, 0]})
 					dict[word][int(flag)] += 1
+	prob_disaster = prob_disaster / total_data
+	prob_not_disaster = prob_not_disaster / total_data
 
 
 def home(request):
 	Profile.objects.all().delete()
-	# dict = {}
 	open_csv()
 	counter()
-	print(dict)
 	for word in dict.keys():
 		if dict[word][1] > 0 :
 			print(word, dict[word][1])
@@ -38,33 +44,37 @@ def home(request):
 def search(request):
 	if request.method == 'POST':
 		data = request.POST.get('textfield')
-		print(analyze(data))
-		return render(request, 'home.html')
+		result = analyze(data)
+		print(result)
+		context = {
+			'result':result,
+			'data':data,
+			}
+		return render(request, 'result.html', context)
 	else:
 		return render(request, 'home.html')
 
 
 def analyze(tweet):
-	print(tweet)
 	words = tweet.lower().split(" ")
 	p_true = 1
 	p_false = 1
+	word_not_exist = 0
+	for word in words:
+		if word not in dict.keys():
+			word_not_exist += 1
 	for word in words:
 		if word in dict.keys():
-			print(word, ":true", dict[word][1], ",false", dict[word][0])
-			if dict[word][1] > 0:
-				p_true *= (dict[word][1] + 1) / (dict[word][0] + dict[word][1] + len(dict.keys()))
-			else:
-				p_true *= 1 / (dict[word][0] + dict[word][1] + len(dict.keys()))
-			
-			if dict[word][0] > 0:
-				p_false *= (dict[word][0] + 1) / (dict[word][0] + dict[word][1] + len(dict.keys()))
-			else:
-				p_false *= 1 / (dict[word][0] + dict[word][1] + len(dict.keys()))
+			p_true *= (dict[word][1] + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
+			p_false *= (dict[word][0] + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
+		else:
+			p_true *= (0 + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
+			p_false *= (0 + 1) / (len(dict.keys()) + len(dict.keys()) + word_not_exist)
+	p_true *= prob_disaster
+	p_false *= prob_not_disaster
 	print("==========ANALYSIS============")
 	print("true:", p_true, ",false:", p_false,"\nthen:")
 	if p_true > p_false:
 		return True
 	else:
 		return False
-	

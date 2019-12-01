@@ -1,13 +1,12 @@
 import csv
 import json
 from webtweesaster.models import Profile
-allData = []
 
 # https://docs.python.org/2/library/csv.html
 # change to the csv file name that you are trying to upload
 def open_csv():
     file_name = 'gempa_bumi_2018.csv'
-    with open(file_name) as csvfile:
+    with open(file_name, encoding="utf8") as csvfile:
         csvfile = csv.reader(csvfile, delimiter=';')
         for each in csvfile:
             temp = '{"username": "' + each[0] + '",' + '"date": "' + each[1] + '",' + '"retweets": "' + each[2] + '",' + '"favorites": "' + each[3] + '",' + '"text": "' + each[4].replace('"', '') + '",' + '"geo": "' + \
@@ -17,8 +16,6 @@ def open_csv():
             # print(temp, "\n")
             temp = json.loads(temp)
             Profile.objects.create(retweets=temp["retweets"], favorites=temp["favorites"], flag=temp["flag"],text=temp["text"])
-            
-        print(allData)
         
 
     # app_name = 'webtweesaster' # change this to your Django app name
