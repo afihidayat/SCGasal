@@ -80,4 +80,3 @@ def analyze(tweet):
 		return True
 	else:
 		return False
-	
