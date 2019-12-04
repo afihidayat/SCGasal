@@ -10,6 +10,15 @@ prob_disaster = 0.0
 prob_not_disaster = 0.0
 total_data = 0.0
 
+def home(request):
+	Profile.objects.all().delete()
+	open_csv()
+	counter()
+	for word in dict.keys():
+		if dict[word][1] > 0 :
+			print(word, dict[word][1])
+	return render(request, 'home.html')
+
 class counter():
 	alldata = Profile.objects.all()
 	for each in alldata:
@@ -29,17 +38,6 @@ class counter():
 					dict[word][int(flag)] += 1
 	prob_disaster = prob_disaster / total_data
 	prob_not_disaster = prob_not_disaster / total_data
-
-
-def home(request):
-	Profile.objects.all().delete()
-	open_csv()
-	counter()
-	for word in dict.keys():
-		if dict[word][1] > 0 :
-			print(word, dict[word][1])
-	return render(request, 'home.html')
-
 
 def search(request):
 	if request.method == 'POST':

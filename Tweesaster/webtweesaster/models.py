@@ -18,7 +18,7 @@ class Profile(models.Model):
 
 
 def loadCsv(filename):
-    lines = csv.reader(open(r'gempa_bumi_2018.csv'))
+    lines = csv.reader(open(r'gempa_bumi_2017.csv'))
     dataset = list(lines)
     for i in range(len(dataset)):
         dataset[i] = [float(x) for x in dataset[i]]

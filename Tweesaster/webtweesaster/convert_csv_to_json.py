@@ -5,7 +5,7 @@ from webtweesaster.models import Profile
 # https://docs.python.org/2/library/csv.html
 # change to the csv file name that you are trying to upload
 def open_csv():
-    file_name = 'gempa_bumi_2018.csv'
+    file_name = 'gempa_bumi_2017.csv'
     with open(file_name, encoding="utf8") as csvfile:
         csvfile = csv.reader(csvfile, delimiter=';')
         for each in csvfile:
