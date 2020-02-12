@@ -7,7 +7,7 @@ colorama==0.3.9
 coverage==4.4.1
 defusedxml==0.5.0
 dj-database-url==0.4.2
-Django==2.1.1
+Django==2.2.10
 django-crispy-forms==1.7.2
 django-environ==0.4.4
 google==2.0.1
@@ -46,7 +46,7 @@ colorama==0.3.9
 coverage==4.4.1
 defusedxml==0.5.0
 dj-database-url==0.4.2
-Django==2.1.1
+Django==2.2.10
 django-crispy-forms==1.7.2
 django-environ==0.4.4
 google==2.0.1
